@@ -11,7 +11,7 @@ class Carousel extends React.Component {
         }
     }
 
-    onPrevHandler = () => {
+    prevHandler = () => {
         let prevImg;
         const prevImgIndex = this.state.images.indexOf(this.state.activeImg);
         prevImgIndex === 0 ? prevImg = this.state.images[this.state.images.length - 1] : prevImg = this.state.images[prevImgIndex - 1]
@@ -21,7 +21,7 @@ class Carousel extends React.Component {
         });
     }
 
-    onNextHandler = () => {
+    nextHandler = () => {
         let nextImg;
         const currentImgIndex = this.state.images.indexOf(this.state.activeImg) + 1;
         currentImgIndex === this.state.images.length ? nextImg = this.state.images[0] : nextImg = this.state.images[currentImgIndex]
@@ -48,11 +48,11 @@ class Carousel extends React.Component {
                 <div className="carousel-inner">
                     {this.renderItem()}
                 </div>
-                <button className="carousel-control-prev" data-bs-target="#carousel" type="button" data-bs-slide="prev" onClick={this.onPrevHandler}>
+                <button className="carousel-control-prev" data-bs-target="#carousel" type="button" data-bs-slide="prev" onClick={this.prevHandler}>
                     <span className="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span className="visually-hidden">Previous</span>
                 </button>
-                <button className="carousel-control-next" data-bs-target="#carousel" type="button" data-bs-slide="next" onClick={this.onNextHandler}>
+                <button className="carousel-control-next" data-bs-target="#carousel" type="button" data-bs-slide="next" onClick={this.nextHandler}>
                     <span className="carousel-control-next-icon" aria-hidden="true"></span>
                     <span className="visually-hidden">Next</span>
                 </button>
