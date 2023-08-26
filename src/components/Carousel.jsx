@@ -61,4 +61,10 @@ class Carousel extends React.Component {
     }
 }
 
+const arr = []
+
+Carousel.defaultProps = {
+    images: ["https://via.placeholder.com/600/92c952", "https://via.placeholder.com/600/771796", "https://via.placeholder.com/600/24f355"]
+}
+
 export default Carousel;
