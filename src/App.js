@@ -1,8 +1,9 @@
+import MyForm from "./components/MyForm.jsx";
 
 function App() {
   return (
     <div className="App">
-
+        <MyForm />
     </div>
   );
 }
