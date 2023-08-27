@@ -12,9 +12,10 @@ class Carousel extends React.Component {
     }
 
     prevHandler = () => {
+        const {images} = this.state;
         let prevImg;
-        const prevImgIndex = this.state.images.indexOf(this.state.activeImg);
-        prevImgIndex === 0 ? prevImg = this.state.images[this.state.images.length - 1] : prevImg = this.state.images[prevImgIndex - 1]
+        const prevImgIndex = images.indexOf(this.state.activeImg);
+        prevImgIndex === 0 ? prevImg = images[images.length - 1] : prevImg = images[prevImgIndex - 1]
 
         this.setState({
             activeImg: prevImg
@@ -22,9 +23,10 @@ class Carousel extends React.Component {
     }
 
     nextHandler = () => {
+        const {images} = this.state;
         let nextImg;
-        const currentImgIndex = this.state.images.indexOf(this.state.activeImg) + 1;
-        currentImgIndex === this.state.images.length ? nextImg = this.state.images[0] : nextImg = this.state.images[currentImgIndex]
+        const currentImgIndex = images.indexOf(this.state.activeImg) + 1;
+        currentImgIndex === images.length ? nextImg = images[0] : nextImg = images[currentImgIndex]
 
         this.setState({
             activeImg: nextImg
