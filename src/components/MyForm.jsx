@@ -106,9 +106,9 @@ class MyForm extends Component {
                                 value={this.state.form.country}
                                 onChange={this.onChangeHandler}>
                                 <option>Choose</option>
-                                <option value="argentina">Argentina</option>
-                                <option value="ukraine">Ukraine</option>
-                                <option value="china">China</option>
+                                <option value="Argentina">Argentina</option>
+                                <option value="Ukraine">Ukraine</option>
+                                <option value="China">China</option>
                             </select>
                         </div>
                         <div className="col-md-6 mb-3">
