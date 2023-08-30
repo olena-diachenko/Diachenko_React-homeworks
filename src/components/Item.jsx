@@ -1,6 +1,4 @@
-const Item = (props) => {
-
-    return (
+const Item = (props) => (
         <div>
             <div className="row">
                 <div className="col-auto">
@@ -11,13 +9,10 @@ const Item = (props) => {
             <hr />
         </div>
     )
-}
 
 Item.defaultProps = {
     task: "Start to add your tasks",
-    onRemove: () => {
-        alert("Sorry, but you're not able to remove this task at this moment")
-    }
+    onRemove: () => alert("Sorry, but you're not able to remove this task at this moment")
 }
 
 export default Item;
