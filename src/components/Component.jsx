@@ -1,4 +1,5 @@
 import React from "react";
+import { v4 as uuid } from 'uuid';
 import ListItem from "./ListItem.jsx";
 
 class Component extends React.Component {
@@ -39,7 +40,7 @@ class Component extends React.Component {
                 <div className="list-group">
                      {this.state.listItems.map(item => <ListItem
                          inner={item}
-                         key={Math.floor(Math.random() * 1000)}
+                         key={uuid()}
                          handleClick={this.onRemoveItem} />)}
                 </div>
             </React.Fragment>
