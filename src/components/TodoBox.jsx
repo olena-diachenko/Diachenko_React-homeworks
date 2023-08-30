@@ -29,7 +29,7 @@ class TodoBox extends Component {
         })
     }
 
-    onRemoveItem = (task) => {
+    onRemoveItem = (task) => (e) => {
         const arr = [...this.state.todoItems];
         const index = arr.indexOf(task);
         arr.splice(index, 1)
@@ -65,7 +65,7 @@ class TodoBox extends Component {
                 <Fragment>
                     {this.state.todoItems.map(item => <Item
                         task={item}
-                        onRemove={() => this.onRemoveItem(item)}
+                        onRemove={this.onRemoveItem(item)}
                         key={uuid()} />)}
                 </Fragment>
             </Fragment>
