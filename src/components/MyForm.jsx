@@ -120,6 +120,7 @@ class MyForm extends Component {
                                         name="acceptRules"
                                         className="form-check-input"
                                         value={this.state.form.acceptRules}
+                                        defaultChecked={this.state.form.acceptRules}
                                         onChange={this.onChangeHandler} />
                                     Accept Rules
                                 </label>
