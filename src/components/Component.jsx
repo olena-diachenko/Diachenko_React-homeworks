@@ -37,12 +37,14 @@ class Component extends React.Component {
                     <button type="button" className="btn btn-outline-success" onClick={this.handleClick}>+</button>
                     <button type="button" className="btn btn-outline-danger" onClick={this.handleClick}>-</button>
                 </div>
-                <div className="list-group">
-                     {this.state.listItems.map(item => <ListItem
-                         inner={item}
-                         key={uuid()}
-                         handleClick={this.onRemoveItem} />)}
-                </div>
+                {this.state.listItems.length !== 0 && (
+                    <div className="list-group">
+                        {this.state.listItems.map(item => <ListItem
+                            inner={item}
+                            key={uuid()}
+                            handleClick={this.onRemoveItem} />)}
+                    </div>
+                )}
             </React.Fragment>
         )
     }
