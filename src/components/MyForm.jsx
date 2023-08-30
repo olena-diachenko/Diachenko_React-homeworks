@@ -38,7 +38,6 @@ class MyForm extends Component {
     }
 
     onBackHandler = (e) => {
-        e.preventDefault()
         this.setState({
             isSubmitted: false
         })
