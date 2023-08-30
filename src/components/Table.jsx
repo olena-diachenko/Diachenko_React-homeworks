@@ -1,15 +1,9 @@
-import cn from "classnames";
-
 const Table = (props) => {
     const { data, onBackHandler } = props;
     const acceptRules = data.form.acceptRules === true ? "accepted" : "not accepted";
 
-    const classes = cn("container", {
-        "visually-hidden": !data.isSubmitted
-    })
-
     return (
-        <div className={classes}>
+        <div className="container">
             <button type="button" className="btn btn-primary" onClick={onBackHandler}>Back</button>
             <table className="table">
                 <tbody>
