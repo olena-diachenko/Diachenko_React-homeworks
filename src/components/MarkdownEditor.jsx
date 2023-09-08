@@ -8,10 +8,6 @@ class MarkdownEditor extends React.Component {
         this.divRef = React.createRef();
     }
 
-    render() {
-        return <div ref={this.divRef} id="editor"></div>
-    }
-
     componentDidMount() {
         this.editor = new Editor({
             el: this.divRef.current,
@@ -23,6 +19,17 @@ class MarkdownEditor extends React.Component {
             this.props.onContentChange(content);
 
         });
+    }
+
+    componentWillUnmount() {
+        if (this.editor) {
+            this.editor.removeHook('change');
+            this.editor = null
+        }
+    }
+
+    render() {
+        return <div ref={this.divRef}></div>
     }
 }
 
