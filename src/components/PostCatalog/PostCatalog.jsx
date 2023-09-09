@@ -1,42 +1,39 @@
-import React from "react";
+import {useState, useEffect} from "react";
 import PostItem from "../PostItem.jsx";
 import "./PostCatalog.css";
 
-class PostCatalog extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            posts: []
-        }
-    }
+const PostCatalog = (props) => {
 
-    handleClick = async() => {
-        const res = await fetch('https://jsonplaceholder.typicode.com/posts')
+    const [posts, setPosts] = useState([])
+    const controller = new AbortController();
+    const {signal} = controller;
+
+    const handleClick = async() => {
+        const res = await fetch('https://jsonplaceholder.typicode.com/posts', {signal})
             .then((response) => response.json())
-        const arr = [...this.state.posts, ...res]
-        this.setState({
-            posts: arr
-        })
-    }
+        const arr = [...posts, ...res];
+        setPosts(arr);
+    };
 
-    render () {
+    useEffect(() => () => {
+            controller.abort();
+        }, [])
 
-        return (
-            this.state.posts.length !== 0 ? (
-                    <div className="posts">
-                        <ul className="posts__list">
-                            {this.state.posts.map(({id, title, body}) =>
-                                <PostItem id={id} title={title} body={body} key={id}/>
-                            )}
-                        </ul>
-                    </div>
-                ) : (
-                    <div className="btn-wrap">
-                        <button type="button" className="btn btn-primary" onClick={this.handleClick}>Show posts</button>
-                    </div>
-                )
+    return (
+        posts.length !== 0 ? (
+                <div className="posts">
+                    <ul className="posts__list">
+                        {posts.map(({id, title, body}) =>
+                            <PostItem id={id} title={title} body={body} key={id}/>
+                        )}
+                    </ul>
+                </div>
+            ) : (
+                <div className="btn-wrap">
+                    <button type="button" className="btn btn-primary" onClick={handleClick}>Show posts</button>
+                </div>
         )
-    }
+    )
 }
 
 export default PostCatalog;
