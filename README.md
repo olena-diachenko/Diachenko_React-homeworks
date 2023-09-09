@@ -1,4 +1,4 @@
-### MarkdownEditor.jsx
+### MarkdownEditor.jsx - Функциональными компонентами
 
 Реализуйте компонент ```<MarkdownEditor />```, который является React оберткой плагина [@toast-ui/editor](https://github.com/nhn/tui.editor/tree/master/apps/editor). Этот плагин позволяет встроить в страницу Markdown-редактор.
 
