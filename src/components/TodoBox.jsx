@@ -1,76 +1,63 @@
-import {Component, Fragment} from "react";
+import { Fragment, useState, useRef } from "react";
 import { v4 as uuid } from 'uuid';
 import Item from "./Item.jsx";
 
-class TodoBox extends Component {
+const TodoBox = (props) => {
+    const [todoItems, setTodoItems] = useState([]);
+    const [inputValue, setInputValue] = useState("");
+    const inputEl = useRef(null);
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            todoItems: [],
-            inputValue: ""
-        }
+    const handleChange = () => {
+        setInputValue(inputEl.current.value)
     }
 
-    handleChange = (e) => {
-        this.setState({
-            inputValue: e.target.value
-        })
-    }
-
-    handleClick = (e) => {
+    const handleClick = (e) => {
         e.preventDefault();
-        const arr = [...this.state.todoItems];
-        const value = this.state.inputValue;
-        arr.unshift(value)
-        this.setState({
-            todoItems: arr,
-            inputValue: ""
-        })
+        const arr = [...todoItems];
+        arr.unshift(inputValue);
+        setTodoItems(arr);
+        setInputValue("");
     }
 
-    onRemoveItem = (task) => (e) => {
-        const arr = [...this.state.todoItems];
+    const onRemoveItem = (task) => (e) => {
+        const arr = [...todoItems];
         const index = arr.indexOf(task);
         arr.splice(index, 1)
-        this.setState({
-            todoItems: arr
-        })
+        setTodoItems(arr);
     }
 
-    render() {
-        return (
+    return (
+        <Fragment>
+            <div className="mb-3">
+                <form className="d-flex">
+                    <div className="me-3">
+                        <input
+                            ref={inputEl}
+                            type="text"
+                            value={inputValue}
+                            required=""
+                            className="form-control"
+                            placeholder="I am going..."
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <button
+                        type="submit"
+                        className="btn btn-primary"
+                        onClick={handleClick}
+                    >
+                        add
+                    </button>
+                </form>
+            </div>
             <Fragment>
-                <div className="mb-3">
-                    <form className="d-flex">
-                        <div className="me-3">
-                            <input
-                                type="text"
-                                value={this.state.inputValue}
-                                required=""
-                                className="form-control"
-                                placeholder="I am going..."
-                                onChange={this.handleChange}
-                            />
-                        </div>
-                        <button
-                            type="submit"
-                            className="btn btn-primary"
-                            onClick={this.handleClick}
-                        >
-                            add
-                        </button>
-                    </form>
-                </div>
-                <Fragment>
-                    {this.state.todoItems.map(item => <Item
-                        task={item}
-                        onRemove={this.onRemoveItem(item)}
-                        key={uuid()} />)}
-                </Fragment>
+                {todoItems.map(item => <Item
+                    task={item}
+                    onRemove={onRemoveItem(item)}
+                    key={uuid()}/>)}
             </Fragment>
-        )
-    }
+        </Fragment>
+    )
 }
 
 export default TodoBox;
