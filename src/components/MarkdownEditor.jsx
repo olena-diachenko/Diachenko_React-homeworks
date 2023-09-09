@@ -1,36 +1,32 @@
-import React from 'react';
+import { useRef, useEffect } from 'react';
 import Editor from '@toast-ui/editor';
 import '@toast-ui/editor/dist/toastui-editor.css';
 
-class MarkdownEditor extends React.Component {
-    constructor(props) {
-        super(props);
-        this.divRef = React.createRef();
-    }
+const MarkdownEditor = (props) => {
+    const divRef = useRef()
+    const editorRef = useRef(null);
 
-    componentDidMount() {
-        this.editor = new Editor({
-            el: this.divRef.current,
+    useEffect(() => {
+        editorRef.current = new Editor({
+            el: divRef.current,
             hideModeSwitch: true,
         });
 
-        this.editor.addHook('change', () => {
-            const content = this.editor.getMarkdown();
-            this.props.onContentChange(content);
-
+        editorRef.current.addHook('change', () => {
+            const content = editorRef.current.getMarkdown();
+            props.onContentChange(content);
         });
-    }
+    }, [props])
 
-    componentWillUnmount() {
-        if (this.editor) {
-            this.editor.removeHook('change');
-            this.editor = null
-        }
-    }
+    useEffect(() => () => {
+            if (editorRef.current) {
+                editorRef.current.removeHook('change');
+                editorRef.current = null
+            }
+        }, [])
 
-    render() {
-        return <div ref={this.divRef}></div>
-    }
+    return <div ref={divRef}></div>
+
 }
 
 export default MarkdownEditor;
