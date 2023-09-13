@@ -6,7 +6,8 @@ module.exports = {
   extends: [
     'airbnb-base',
     'prettier',
-    'react-app'
+    'react-app',
+    'plugin:react-hooks/recommended'
   ],
   overrides: [
     {
@@ -25,9 +26,14 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
+  plugins: [
+    "react-hooks"
+  ],
   rules: {
     'no-plusplus': 'off',
     'strict': 0,
     'react/react-in-jsx-scope': 'off',
+    'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'warn',
   },
 };
