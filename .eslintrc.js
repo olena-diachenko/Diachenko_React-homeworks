@@ -7,16 +7,14 @@ module.exports = {
     'airbnb-base',
     'prettier',
     'react-app',
-    'plugin:react-hooks/recommended'
+    'plugin:react-hooks/recommended',
   ],
   overrides: [
     {
       env: {
         node: true,
       },
-      files: [
-        '.eslintrc.{js,cjs}',
-      ],
+      files: ['.eslintrc.{js,cjs}'],
       parserOptions: {
         sourceType: 'script',
       },
@@ -26,14 +24,13 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  plugins: [
-    "react-hooks"
-  ],
+  plugins: ['react-hooks'],
   rules: {
+    strict: 0,
     'no-plusplus': 'off',
-    'strict': 0,
     'react/react-in-jsx-scope': 'off',
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
+    'no-param-reassign': ['error', { props: false }],
   },
 };
