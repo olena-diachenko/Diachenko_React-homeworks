@@ -1,11 +1,19 @@
-import TodoList from './components/TodoList';
+import { Routes, Route } from 'react-router-dom';
+import NoMatch from './pages/NoMatch.jsx';
+import TodoItem from './pages/TodoItem.jsx';
+import HomePage from './pages/HomePage';
+import TodosList from './pages/TodosList.jsx';
 
 function App() {
   return (
-    <>
-      <h1 className="text-center mt-5 mb-5">TODO LIST</h1>
-      <TodoList />
-    </>
+    <main>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="todo-list" element={<TodosList />} />
+        <Route path="todo-list/:todoItemIndex" element={<TodoItem />} />
+        <Route path="*" element={<NoMatch />} />
+      </Routes>
+    </main>
   );
 }
 

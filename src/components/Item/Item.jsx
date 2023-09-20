@@ -1,15 +1,19 @@
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { completedItem, deleteItem } from '../../store/slices/storage';
 import styles from './style.module.css';
-import { completedItem, deleteItem } from '../../../store/slices/storage';
 
 const Item = props => {
-  const storage = useSelector(state => state.storage.storage);
+  const storage = useSelector(state => state.storage.data);
+
   const dispatch = useDispatch();
 
-  const handleClick = e => {
+  const navigate = useNavigate();
+
+  const removeHandler = e => {
     const itemId = e.target.id;
     const dataToDelete = storage.find(item => item.id === itemId);
     dispatch(deleteItem(dataToDelete));
@@ -19,9 +23,12 @@ const Item = props => {
     const itemId = e.target.id;
     const currentItem = storage.find(item => item.id === itemId);
     const itemToChange = { ...currentItem };
-    itemToChange.completed = !itemToChange.completed;
+    itemToChange.isCompleted = !itemToChange.isCompleted;
     dispatch(completedItem(itemToChange));
   };
+
+  const redirectHandler = path => () => navigate(path);
+
   return (
     <>
       <div className={styles.taskWrapper}>
@@ -31,18 +38,26 @@ const Item = props => {
         <Form.Check
           type="checkbox"
           label={'Завершено'}
-          checked={props.item.completed}
+          checked={props.item.isCompleted}
           id={props.item.id}
           onChange={handleChange}
         />
         <hr />
-        <Button
-          className="btn btn-danger delete-btn"
-          id={props.item.id}
-          onClick={handleClick}
-        >
-          Удалить
-        </Button>
+        <Form.Group className="d-flex justify-content-between">
+          <Button
+            className="btn btn-primary delete-btn"
+            onClick={redirectHandler(`/todo-list/${props.index}`)}
+          >
+            Open
+          </Button>
+          <Button
+            className="btn btn-danger delete-btn"
+            id={props.item.id}
+            onClick={removeHandler}
+          >
+            Delete
+          </Button>
+        </Form.Group>
       </div>
     </>
   );
@@ -50,6 +65,7 @@ const Item = props => {
 
 Item.propTypes = {
   item: PropTypes.object,
+  index: PropTypes.number,
 };
 
 export default Item;

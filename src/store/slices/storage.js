@@ -1,33 +1,33 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { v4 as uuid } from 'uuid';
+import generateUniqueId from '../../util/functions';
 
 export const storageSlice = createSlice({
   name: 'storage',
   initialState: {
-    storage: JSON.parse(localStorage.getItem('todo-items')) || [],
+    data: JSON.parse(localStorage.getItem('todo-items')) || [],
   },
   reducers: {
     setData: (state, { payload }) => {
-      const dataToSave = { ...payload, id: uuid() };
-      state.storage.push(dataToSave);
-      localStorage.setItem('todo-items', JSON.stringify(state.storage));
+      const dataToSave = { ...payload, id: generateUniqueId() };
+      state.data.push(dataToSave);
+      localStorage.setItem('todo-items', JSON.stringify(state.data));
     },
 
     deleteStorage: state => {
-      localStorage.clear();
-      state.storage = [];
+      state.data = [];
+      localStorage.setItem('todo-items', JSON.stringify(state.data));
     },
 
     deleteItem: (state, { payload }) => {
-      state.storage = state.storage.filter(item => item.id !== payload.id);
-      localStorage.setItem('todo-items', JSON.stringify(state.storage));
+      state.data = state.data.filter(item => item.id !== payload.id);
+      localStorage.setItem('todo-items', JSON.stringify(state.data));
     },
 
     completedItem: (state, { payload }) => {
-      const itemToChange = state.storage.find(item => item.id === payload.id);
-      const itemIndex = state.storage.indexOf(itemToChange);
-      state.storage.splice(itemIndex, 1, payload);
-      localStorage.setItem('todo-items', JSON.stringify(state.storage));
+      const itemToChange = state.data.find(item => item.id === payload.id);
+      const itemIndex = state.data.indexOf(itemToChange);
+      state.data.splice(itemIndex, 1, payload);
+      localStorage.setItem('todo-items', JSON.stringify(state.data));
     },
   },
 });

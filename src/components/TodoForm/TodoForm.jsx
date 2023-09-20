@@ -5,7 +5,7 @@ import { useFormik } from 'formik';
 import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
 import styles from './style.module.css';
-import { deleteStorage, setData } from '../../../store/slices/storage';
+import { deleteStorage, setData } from '../../store/slices/storage';
 
 const TodoForm = props => {
   const dispatch = useDispatch();
@@ -14,7 +14,7 @@ const TodoForm = props => {
     initialValues: {
       title: '',
       description: '',
-      completed: false,
+      isCompleted: false,
     },
     onSubmit: (values, { resetForm }) => {
       dispatch(setData(values));
@@ -22,7 +22,8 @@ const TodoForm = props => {
     },
     validationSchema: Yup.object({
       title: Yup.string()
-        .min(1, 'Must be 1 character or more')
+        .min(3, 'Must be 3 character or more')
+        .max(50, 'Must be 50 character or less')
         .required('Required'),
       description: Yup.string()
         .min(3, 'Must be 3 character or more')
@@ -30,7 +31,11 @@ const TodoForm = props => {
     }),
   });
 
-  const deleteAllHandler = () => {
+  const resetHandler = () => {
+    formik.resetForm();
+  };
+
+  const clearStorageHandler = () => {
     dispatch(deleteStorage());
   };
 
@@ -73,16 +78,16 @@ const TodoForm = props => {
           <Button type="submit" variant="primary" className="">
             Create Task!
           </Button>
-          <Button type="reset" variant="warning" onClick={formik.handleReset}>
-            Очистить
+          <Button type="reset" variant="warning" onClick={resetHandler}>
+            Clear
           </Button>
         </Stack>
         <Button
           type="button"
           className="btn btn-danger remove-all"
-          onClick={deleteAllHandler}
+          onClick={clearStorageHandler}
         >
-          Удалить все
+          Clear all
         </Button>
       </Form.Group>
     </Form>
