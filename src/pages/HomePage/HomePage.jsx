@@ -10,8 +10,8 @@ import List from '../../components/List';
 import styles from './style.module.css';
 import DefaultTemplate from '../../templates/DefaultTemplate.jsx';
 
-const HomePage = props => {
-  const storage = useSelector(state => state.storage.data);
+const HomePage = () => {
+  const todos = useSelector(state => state.todos.todos);
   const navigate = useNavigate();
 
   const redirectHandler = path => () => navigate(path);
@@ -26,7 +26,7 @@ const HomePage = props => {
           <Col lg={4}>
             <TodoForm />
           </Col>
-          {storage.length > 0 && (
+          {todos.length > 0 && (
             <Col lg={8}>
               <Row>
                 <List />

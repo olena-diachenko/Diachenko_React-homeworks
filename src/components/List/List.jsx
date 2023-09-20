@@ -4,11 +4,11 @@ import Item from '../Item';
 import generateUniqueId from '../../util/functions';
 
 const List = () => {
-  const storage = useSelector(state => state.storage.data);
+  const todos = useSelector(state => state.todos.todos);
 
   return (
     <>
-      {storage
+      {todos
         .map((todoItem, index) => (
           <Col lg={4} key={generateUniqueId()}>
             <Item item={todoItem} index={index} />

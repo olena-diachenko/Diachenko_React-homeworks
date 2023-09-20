@@ -3,28 +3,26 @@ import Button from 'react-bootstrap/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { completedItem, deleteItem } from '../../store/slices/storage';
+import { completedTodo, removeTodo } from '../../store/slices/todos';
 import styles from './style.module.css';
 
-const Item = props => {
-  const storage = useSelector(state => state.storage.data);
+const Item = ({ item, index }) => {
+  const todos = useSelector(state => state.todos.todos);
 
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
-  const removeHandler = e => {
-    const itemId = e.target.id;
-    const dataToDelete = storage.find(item => item.id === itemId);
-    dispatch(deleteItem(dataToDelete));
+  const removeHandler = () => {
+    const dataToDelete = todos.find(todo => todo.id === item.id);
+    dispatch(removeTodo(dataToDelete));
   };
 
-  const handleChange = e => {
-    const itemId = e.target.id;
-    const currentItem = storage.find(item => item.id === itemId);
-    const itemToChange = { ...currentItem };
-    itemToChange.isCompleted = !itemToChange.isCompleted;
-    dispatch(completedItem(itemToChange));
+  const handleChange = () => {
+    // const currentItem = storage.find(todo => todo.id === item.id);
+    // const itemToChange = { ...currentItem };
+    // itemToChange.isCompleted = !itemToChange.isCompleted;
+    dispatch(completedTodo(item.id));
   };
 
   const redirectHandler = path => () => navigate(path);
@@ -32,29 +30,24 @@ const Item = props => {
   return (
     <>
       <div className={styles.taskWrapper}>
-        <div className={styles.taskHeading}>{props.item.title}</div>
-        <div className={styles.taskDescription}>{props.item.description}</div>
+        <div className={styles.taskHeading}>{item.title}</div>
+        <div className={styles.taskDescription}>{item.description}</div>
         <hr />
         <Form.Check
           type="checkbox"
           label={'Завершено'}
-          checked={props.item.isCompleted}
-          id={props.item.id}
+          checked={item.isCompleted}
           onChange={handleChange}
         />
         <hr />
         <Form.Group className="d-flex justify-content-between">
           <Button
             className="btn btn-primary delete-btn"
-            onClick={redirectHandler(`/todo-list/${props.index}`)}
+            onClick={redirectHandler(`/todo-list/${index}`)}
           >
             Open
           </Button>
-          <Button
-            className="btn btn-danger delete-btn"
-            id={props.item.id}
-            onClick={removeHandler}
-          >
+          <Button className="btn btn-danger delete-btn" onClick={removeHandler}>
             Delete
           </Button>
         </Form.Group>

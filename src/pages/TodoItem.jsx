@@ -6,9 +6,9 @@ import Stack from 'react-bootstrap/Stack';
 import DefaultTemplate from '../templates/DefaultTemplate.jsx';
 
 const TodoItem = () => {
-  const storage = useSelector(state => state.storage.data);
+  const todos = useSelector(state => state.todos.todos);
   const index = useParams().todoItemIndex;
-  const item = storage[index];
+  const item = todos[index];
 
   const navigation = useNavigate();
 

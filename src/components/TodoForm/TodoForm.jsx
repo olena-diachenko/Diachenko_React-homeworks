@@ -5,7 +5,7 @@ import { useFormik } from 'formik';
 import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
 import styles from './style.module.css';
-import { deleteStorage, setData } from '../../store/slices/storage';
+import { deleteStorage, addTodo } from '../../store/slices/todos';
 
 const TodoForm = props => {
   const dispatch = useDispatch();
@@ -17,7 +17,7 @@ const TodoForm = props => {
       isCompleted: false,
     },
     onSubmit: (values, { resetForm }) => {
-      dispatch(setData(values));
+      dispatch(addTodo(values));
       resetForm({ values: '' });
     },
     validationSchema: Yup.object({
