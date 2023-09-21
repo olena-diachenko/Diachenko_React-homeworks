@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import List from '../components/List';
 import DefaultTemplate from '../templates/DefaultTemplate.jsx';
 
-const TodosList = props => {
+const TodosList = () => {
   const navigation = useNavigate();
 
   const backHandler = value => e => {

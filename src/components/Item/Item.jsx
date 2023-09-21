@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { completedTodo, removeTodo } from '../../store/slices/todos';
+import { completedTodo, removeTodo } from '../../store/slices/todos.jsx';
 import styles from './style.module.css';
 
 const Item = ({ item, index }) => {
@@ -19,9 +19,6 @@ const Item = ({ item, index }) => {
   };
 
   const handleChange = () => {
-    // const currentItem = storage.find(todo => todo.id === item.id);
-    // const itemToChange = { ...currentItem };
-    // itemToChange.isCompleted = !itemToChange.isCompleted;
     dispatch(completedTodo(item.id));
   };
 

@@ -5,9 +5,9 @@ import { useFormik } from 'formik';
 import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
 import styles from './style.module.css';
-import { deleteStorage, addTodo } from '../../store/slices/todos';
+import { deleteStorage, addTodo } from '../../store/slices/todos.jsx';
 
-const TodoForm = props => {
+const TodoForm = () => {
   const dispatch = useDispatch();
 
   const formik = useFormik({
