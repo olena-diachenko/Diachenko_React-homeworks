@@ -32,7 +32,7 @@ const Item = ({ item, index }) => {
         <hr />
         <Form.Check
           type="checkbox"
-          label={'Завершено'}
+          label={'Completed'}
           checked={item.isCompleted}
           onChange={handleChange}
         />
