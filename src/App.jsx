@@ -8,9 +8,9 @@ function App() {
   return (
     <main>
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="todo-list" element={<TodosList />} />
-        <Route path="todo-list/:todoItemIndex" element={<TodoItem />} />
+        <Route path="todo-list" element={<HomePage />} />
+        <Route path="list-todo" element={<TodosList />} />
+        <Route path="list-todo/:todoItemIndex" element={<TodoItem />} />
         <Route path="*" element={<NoMatch />} />
       </Routes>
     </main>

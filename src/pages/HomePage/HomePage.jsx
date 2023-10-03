@@ -18,7 +18,7 @@ const HomePage = () => {
 
   return (
     <DefaultTemplate>
-      <Link to="/todo-list" className={styles.title}>
+      <Link to="/list-todo" className={styles.title}>
         TODO LIST
       </Link>
       <Container>
@@ -34,7 +34,7 @@ const HomePage = () => {
               <Stack className="col-md-2 mx-auto mt-3">
                 <Button
                   variant="primary"
-                  onClick={redirectHandler('/todo-list')}
+                  onClick={redirectHandler('/list-todo')}
                 >
                   Open List
                 </Button>

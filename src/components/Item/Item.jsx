@@ -40,7 +40,7 @@ const Item = ({ item, index }) => {
         <Form.Group className="d-flex justify-content-between">
           <Button
             className="btn btn-primary delete-btn"
-            onClick={redirectHandler(`/todo-list/${index}`)}
+            onClick={redirectHandler(`/list-todo/${index}`)}
           >
             Open
           </Button>
