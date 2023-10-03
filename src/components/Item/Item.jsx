@@ -18,7 +18,7 @@ const Item = ({ item, index }) => {
     dispatch(removeTodo(dataToDelete));
   };
 
-  const handleChange = () => {
+  const completedHandler = () => {
     dispatch(completedTodo(item.id));
   };
 
@@ -34,7 +34,7 @@ const Item = ({ item, index }) => {
           type="checkbox"
           label={'Completed'}
           checked={item.isCompleted}
-          onChange={handleChange}
+          onChange={completedHandler}
         />
         <hr />
         <Form.Group className="d-flex justify-content-between">
